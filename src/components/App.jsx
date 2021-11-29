@@ -35,15 +35,15 @@ function App() {
   }
 
   const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(prev => !prev);
+    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
   }
 
   const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(prev => !prev)
+    setIsEditProfilePopupOpen(!isEditProfilePopupOpen)
   }
 
   const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(prev => !prev)
+    setIsAddPlacePopupOpen(!isAddPlacePopupOpen)
   }
 
   const closeAllPopups = () => {
@@ -55,7 +55,6 @@ function App() {
   }
 
   return (
-    <>
       <div className="root__wrapper">
         <Header />
         <Main onEditProfileClick={handleEditProfileClick}
@@ -70,11 +69,9 @@ function App() {
           isImageModalOpen={isImageModalOpen}
           isDeleteImagePopupOpen={isDeleteImagePopupOpen}
           cardData={selectedCard}
-
         />
         <Footer />
       </div>
-    </>
   );
 }
 

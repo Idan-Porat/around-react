@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PopupWithForm from './PopupWithForm.jsx';
 import PopupWithImage from './PopupWithImage.jsx';
 import Card from './Card.jsx';
@@ -14,51 +14,46 @@ export const api = new Api({
 
 function Main(props) {
 
-  const [userName, setUserName] = React.useState();
-  const [userDescription, setUserDescription] = React.useState();
-  const [userAvatar, setUserAvatar] = React.useState();
+  const { onEditAvatarClick, onEditProfileClick, onAddPlaceClick, onCloseAllPopups, isImageModalOpen, cardData
+    , onDeleteImagePopupOpen, cardClickHandler, isDeleteImagePopupOpen, isEditProfilePopupOpen, isAddPlacePopupOpen,
+    isEditAvatarPopupOpen } = props;
 
-  useEffect(() => {
+  const [userName, setUserName] = React.useState("");
+  const [userDescription, setUserDescription] = React.useState("");
+  const [userAvatar, setUserAvatar] = React.useState("");
+  const [cards, setCards] = React.useState([]);
+
+  React.useEffect(() => {
     api.getUserInfo().then((res) => {
       setUserName(res.name);
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
-    });
+    }).catch((error) => console.log(error))
   }, []);
 
-
-  function isEditAvatarPopupOpen() {
-    props.onEditAvatarClick();
-  }
-
-  function isEditProfilePopupOpen() {
-    props.onEditProfileClick();
-  }
-
-  function isAddPlacePopupOpen() {
-    props.onAddPlaceClick();
-  }
-  
-  function closeAllPopups() {
-    props.onCloseAllPopups();
-  }
+  React.useEffect(() => {
+    api.getInitialCards()
+      .then(res => {
+        setCards(res)
+      }).catch((error) => console.log(error))
+  }, [])
 
   return (
     <main className="content">
       <section className="profile">
         <div className="avatar">
           <div className="avatar__image" style={{ backgroundImage: `url(${userAvatar})` }} alt="avatar-pic"></div>
-          <button onClick={isEditAvatarPopupOpen} type="button" className="avatar__edit"></button>
+          <button onClick={onEditAvatarClick} type="button" className="avatar__edit"></button>
         </div>
         <div className="profile__info">
           <h1 className="profile__full-name">{userName}</h1>
           <p className="profile__career">{userDescription}</p>
-          <button onClick={isEditProfilePopupOpen} type="button" className="profile__button" id="editButton"></button>
+          <button onClick={onEditProfileClick} type="button" className="profile__button" id="editButton"></button>
         </div>
-        <button onClick={isAddPlacePopupOpen} type="button" className="profile__rectangle" id="addPhoto"></button>
+        <button onClick={onAddPlaceClick} type="button" className="profile__rectangle" id="addPhoto"></button>
       </section>
 
-      <PopupWithForm name="edit-avatar" title="Change profile picture" btnSubmitTitle="Save" isOpen={props.isEditAvatarPopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name="edit-avatar" title="Change profile picture" btnSubmitTitle="Save" isOpen={isEditAvatarPopupOpen} onClose={onCloseAllPopups}>
         <label className="popup__field">
           <input placeholder="Image link" id="avatar-input" className="popup__item popup__item_type_avatar"
             name="image" type="url" required />
@@ -66,7 +61,7 @@ function Main(props) {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name="edit" title="Edit Profile" btnSubmitTitle="Save" isOpen={props.isEditProfilePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name="edit" title="Edit Profile" btnSubmitTitle="Save" isOpen={isEditProfilePopupOpen} onClose={onCloseAllPopups}>
         <label className="popup__field">
           <input placeholder="Name" id="name-input" className="popup__item popup__item_type_name" name="fullName"
             type="text" required minLength="2" maxLength="40" />
@@ -79,7 +74,7 @@ function Main(props) {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name="add-photo" title="New place" btnSubmitTitle="Create" isOpen={props.isAddPlacePopupOpen} onClose={closeAllPopups}>
+      <PopupWithForm name="add-photo" title="New place" btnSubmitTitle="Create" isOpen={isAddPlacePopupOpen} onClose={onCloseAllPopups}>
         <label className="popup__field">
           <input placeholder="Title" id="title-input" className="popup__item popup__item_type_photo-title"
             name="title" type="text" required minLength="1" maxLength="30" />
@@ -92,14 +87,18 @@ function Main(props) {
         </label>
       </PopupWithForm>
 
-      <PopupWithForm name="delete-photo" title="Are you sure?" btnSubmitTitle="Yes" isOpen={props.isDeleteImagePopupOpen} onClose={closeAllPopups}>
-      </PopupWithForm>    
+      <PopupWithForm name="delete-photo" title="Are you sure?" btnSubmitTitle="Yes" isOpen={isDeleteImagePopupOpen} onClose={onCloseAllPopups}>
+      </PopupWithForm>
 
-      <PopupWithImage isOpen={props.isImageModalOpen} onClose={closeAllPopups} cardData={props.cardData}></PopupWithImage>
+      <PopupWithImage isOpen={isImageModalOpen} onClose={onCloseAllPopups} cardData={cardData}></PopupWithImage>
 
       <section className="elements">
         <ul className="elements__container">
-          <Card cardClickHandler={props.cardClickHandler} onDeleteImagePopupOpen={props.onDeleteImagePopupOpen}/>
+          {
+            cards.map(card => (
+              <Card card={card} cardClickHandler={cardClickHandler} onDeleteImagePopupOpen={onDeleteImagePopupOpen} />
+            ))
+          }
         </ul>
       </section>
     </main>
