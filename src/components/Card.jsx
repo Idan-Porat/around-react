@@ -1,10 +1,10 @@
 import React from "react";
 function Card(props) {
 
-    const { cardClickHandler, onDeleteImagePopupOpen, card } = props;
+    const { cardClickHandler, onDeleteImagePopupOpen, card, key } = props;
 
     return (
-        <li className="elements__card" key={card._id}>
+        <li className="elements__card" key={key}>
             <button type="button" onClick={() => onDeleteImagePopupOpen(card)} className="elements__delete-button" aria-label="delete button"></button>
             <div className="elements__pic" onClick={() => cardClickHandler(card)} style={{ backgroundImage: `url(${card.link})` }} alt={card.name}></div>
             <div className="elements__inner-container">

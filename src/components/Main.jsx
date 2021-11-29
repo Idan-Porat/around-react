@@ -96,7 +96,7 @@ function Main(props) {
         <ul className="elements__container">
           {
             cards.map(card => (
-              <Card card={card} cardClickHandler={cardClickHandler} onDeleteImagePopupOpen={onDeleteImagePopupOpen} />
+              <Card card={card} key={card._id} cardClickHandler={cardClickHandler} onDeleteImagePopupOpen={onDeleteImagePopupOpen} />
             ))
           }
         </ul>
