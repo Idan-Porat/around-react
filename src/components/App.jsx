@@ -55,23 +55,23 @@ function App() {
   }
 
   return (
-      <div className="root__wrapper">
-        <Header />
-        <Main onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCloseAllPopups={closeAllPopups}
-          cardClickHandler={handleCardClick}
-          onDeleteImagePopupOpen={handleDeleteImageClick}
-          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
-          isEditProfilePopupOpen={isEditProfilePopupOpen}
-          isImageModalOpen={isImageModalOpen}
-          isDeleteImagePopupOpen={isDeleteImagePopupOpen}
-          cardData={selectedCard}
-        />
-        <Footer />
-      </div>
+    <div className="root__wrapper">
+      <Header />
+      <Main onEditProfileClick={handleEditProfileClick}
+        onAddPlaceClick={handleAddPlaceClick}
+        onEditAvatarClick={handleEditAvatarClick}
+        onCloseAllPopups={closeAllPopups}
+        cardClickHandler={handleCardClick}
+        onDeleteImagePopupOpen={handleDeleteImageClick}
+        isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+        isAddPlacePopupOpen={isAddPlacePopupOpen}
+        isEditProfilePopupOpen={isEditProfilePopupOpen}
+        isImageModalOpen={isImageModalOpen}
+        isDeleteImagePopupOpen={isDeleteImagePopupOpen}
+        cardData={selectedCard}
+      />
+      <Footer />
+    </div>
   );
 }
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PopupWithForm from './PopupWithForm.jsx';
-import PopupWithImage from './PopupWithImage.jsx';
+import ImagePopup from './ImagePopup.jsx';
 import Card from './Card.jsx';
 import Api from '../utils/api.js';
 
@@ -90,7 +90,7 @@ function Main(props) {
       <PopupWithForm name="delete-photo" title="Are you sure?" btnSubmitTitle="Yes" isOpen={isDeleteImagePopupOpen} onClose={onCloseAllPopups}>
       </PopupWithForm>
 
-      <PopupWithImage isOpen={isImageModalOpen} onClose={onCloseAllPopups} cardData={cardData}></PopupWithImage>
+      <ImagePopup isOpen={isImageModalOpen} onClose={onCloseAllPopups} cardData={cardData}></ImagePopup>
 
       <section className="elements">
         <ul className="elements__container">
