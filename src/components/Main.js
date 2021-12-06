@@ -1,8 +1,8 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm.jsx';
-import ImagePopup from './ImagePopup.jsx';
-import Card from './Card.jsx';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.jsx';
+import PopupWithForm from './PopupWithForm.js';
+import ImagePopup from './ImagePopup.js';
+import Card from './Card.js';
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 
 

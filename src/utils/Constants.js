@@ -1,5 +1,3 @@
-import FormValidator from "./FormValidator";
-
 export const popupConfig = { 
     formSelector: ".popup", 
     inputSelectorSet: ".popup__set", 

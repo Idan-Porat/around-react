@@ -1,14 +1,13 @@
 import React from 'react';
-import { CurrentUserContext } from '../contexts/CurrentUserContext.jsx';
-import Header from './Header.jsx';
-import Main from './Main.jsx';
+import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import Header from './Header';
+import Main from './Main';
 import EditProfilePopup from './EditProfilePopup';
-import EditAvatarPopup from './EditAvatarPopup.jsx';
-import AddPlacePopup from './AddPlacePopup.jsx';
-import Footer from './Footer.jsx';
+import EditAvatarPopup from './EditAvatarPopup';
+import AddPlacePopup from './AddPlacePopup.js';
+import Footer from './Footer';
 import { api } from '../utils/api.js';
-import './index.css';
-import DeletePhotoPopup from './DeletePhotoPopup.jsx';
+import DeletePhotoPopup from './DeletePhotoPopup';
 function App() {
 
   const [cards, setCards] = React.useState([]);

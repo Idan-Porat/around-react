@@ -1,6 +1,6 @@
 import React from 'react';
 import FormValidator from '../utils/FormValidator';
-import { popupConfig } from '../utils/Constants.jsx';
+import { popupConfig } from '../utils/Constants.js';
 
 function PopupWithForm(props) {
     const { name, isOpen, onClose, title, btnSubmitTitle, children, validate, onSubmit } = props;
