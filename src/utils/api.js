@@ -1,6 +1,6 @@
 import react from "react";
 
-export default class Api {
+class Api {
 
     constructor({ baseURL, headers }) {
         this._baseURL = baseURL;
@@ -92,3 +92,5 @@ export const api = new Api({
         "Content-Type": "application/json"
     }
 });
+
+export default Api;
