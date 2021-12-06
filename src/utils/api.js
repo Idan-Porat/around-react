@@ -8,7 +8,6 @@ export default class Api {
     }
 
     _getResponseData(res) {
-
         if (!res.ok) {
             return Promise.reject(`Error: ${res.status}`);
         }
@@ -77,7 +76,7 @@ export default class Api {
             .then(res => this._getResponseData(res))
     }
 
-    unlikeCard = (cardId) => {
+    unLikeCard = (cardId) => {
         return fetch(`${this._baseURL}/cards/likes/${cardId}`, {
             headers: this._headers,
             method: 'DELETE'
@@ -85,3 +84,11 @@ export default class Api {
             .then(res => this._getResponseData(res))
     }
 }
+
+export const api = new Api({
+    baseURL: "https://around.nomoreparties.co/v1/group-12",
+    headers: {
+        authorization: "001651b9-e63d-4f3d-8d65-ab968b3111ee",
+        "Content-Type": "application/json"
+    }
+});
