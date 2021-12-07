@@ -5,6 +5,7 @@ import Main from './Main';
 import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup.js';
+import ImagePopup from './ImagePopup';
 import Footer from './Footer';
 import { api } from '../utils/api.js';
 import DeletePhotoPopup from './DeletePhotoPopup';
@@ -40,11 +41,11 @@ function App() {
     if (isLiked) {
       api.unLikeCard(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      });
+      }).catch((error) => console.log(error));
     } else {
       api.likeCard(card._id, !isLiked).then((newCard) => {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      });
+      }).catch((error) => console.log(error));
     }
   }
 
@@ -72,9 +73,10 @@ function App() {
     const id = selectedCard._id;
     try {
       await api.deleteCard(id);
-      return setCards(cards.filter((card) => card._id !== id));
+       setCards(cards.filter((card) => card._id !== id))
+       closeAllPopups();
     } catch (error) {
-      return Promise.reject(error)
+      console.log(error);
     }
   };
 
@@ -114,29 +116,36 @@ function App() {
         .setUserInfo(data)
         .then((res) => {
           setCurrentUser(res)
+          closeAllPopups();
         })
-        .catch((error) => Promise.reject(error));
-    } catch (error) { return Promise.reject(error) }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const handleUpdateAvatar = async (data) => {
     try {
       return await api
-        .setUserImage(data.avatar).then(res => { setCurrentUser(res) })
-        .catch((error) => Promise.reject(error))
-
-    } catch (error) { return Promise.reject(error) }
+        .setUserImage(data.avatar).then(res => {
+          setCurrentUser(res)
+          closeAllPopups();
+        })
+    } catch (error) {
+      console.log(error);
+    }
   };
 
 
   const handleAddPlaceSubmit = async (card) => {
     try {
-      await api.createNewCard(card).then((res) =>
-      setCards((Cards) => {
+      await api.createNewCard(card).then((res) => {
+        setCards((Cards) => {
           return [res].concat(Cards)
-        })).catch((error) => Promise.reject(error))
+        })
+        closeAllPopups();
+      })
     } catch (error) {
-      return Promise.reject(error)
+      console.log(error);
     }
   };
 
@@ -172,10 +181,11 @@ function App() {
           isOpen={isAddPlacePopupOpen}
           onClose={closeAllPopups}
           addNewPhoto={handleAddPlaceSubmit} />
-        <DeletePhotoPopup 
-        isOpen={isDeleteImagePopupOpen}
-        onClose={closeAllPopups}
-        deleteCard={handleDeleteCard}/>
+        <DeletePhotoPopup
+          isOpen={isDeleteImagePopupOpen}
+          onClose={closeAllPopups}
+          deleteCard={handleDeleteCard} />
+        <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
         <Footer />
       </div>
     </CurrentUserContext.Provider>

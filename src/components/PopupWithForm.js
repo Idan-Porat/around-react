@@ -32,7 +32,6 @@ function PopupWithForm(props) {
                 <form className="popup__input-container" name="form" ref={formRef} onSubmit={(e) => {
                     e.preventDefault();
                     onSubmit(e);
-                    onClose();
                 }}>
                     <fieldset className="popup__set">
                         <h2 className="popup__header">{title}</h2>

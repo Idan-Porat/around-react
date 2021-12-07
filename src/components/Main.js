@@ -1,6 +1,4 @@
 import React from 'react';
-import PopupWithForm from './PopupWithForm.js';
-import ImagePopup from './ImagePopup.js';
 import Card from './Card.js';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
@@ -8,8 +6,8 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function Main(props) {
 
-  const { onEditAvatarClick, onEditProfileClick, onAddPlaceClick, onCloseAllPopups, isImageModalOpen, cardData
-    , onDeleteImagePopupOpen, cardClickHandler, isDeleteImagePopupOpen, cards, onCardLike } = props;
+  const { onEditAvatarClick, onEditProfileClick, onAddPlaceClick,
+    onDeleteImagePopupOpen, cardClickHandler, cards, onCardLike } = props;
 
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -17,7 +15,7 @@ function Main(props) {
     <main className="content">
       <section className="profile">
         <div className="avatar">
-          <div className="avatar__image" style={{ backgroundImage: `url(${currentUser.avatar})` }} alt="avatar-pic"></div>
+          <div className="avatar__image" style={{ backgroundImage: `url(${currentUser.avatar})` }}></div>
           <button onClick={onEditAvatarClick} type="button" className="avatar__edit"></button>
         </div>
         <div className="profile__info">
@@ -27,8 +25,6 @@ function Main(props) {
         </div>
         <button onClick={onAddPlaceClick} type="button" className="profile__rectangle" id="addPhoto"></button>
       </section>
-
-      <ImagePopup isOpen={isImageModalOpen} onClose={onCloseAllPopups} cardData={cardData}></ImagePopup>
 
       <section className="elements">
         <ul className="elements__container">
