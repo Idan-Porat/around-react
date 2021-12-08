@@ -73,8 +73,8 @@ function App() {
     const id = selectedCard._id;
     try {
       await api.deleteCard(id);
-       setCards(cards.filter((card) => card._id !== id))
-       closeAllPopups();
+      setCards(cards.filter((card) => card._id !== id))
+      closeAllPopups();
     } catch (error) {
       console.log(error);
     }
@@ -152,23 +152,26 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <div className="root__wrapper">
-        <Header />
-        <Main onEditProfileClick={handleEditProfileClick}
-          onAddPlaceClick={handleAddPlaceClick}
-          onEditAvatarClick={handleEditAvatarClick}
-          onCloseAllPopups={closeAllPopups}
-          cardClickHandler={handleCardClick}
-          onDeleteImagePopupOpen={handleDeleteImageClick}
-          cards={cards}
-          isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-          isAddPlacePopupOpen={isAddPlacePopupOpen}
-          isEditProfilePopupOpen={isEditProfilePopupOpen}
-          isImageModalOpen={isImageModalOpen}
-          isDeleteImagePopupOpen={isDeleteImagePopupOpen}
-          cardData={selectedCard}
-          onCardLike={handleCardLike}
-        />
+      <div class="root">
+        <div className="root__wrapper">
+          <Header />
+          <Main onEditProfileClick={handleEditProfileClick}
+            onAddPlaceClick={handleAddPlaceClick}
+            onEditAvatarClick={handleEditAvatarClick}
+            onCloseAllPopups={closeAllPopups}
+            cardClickHandler={handleCardClick}
+            onDeleteImagePopupOpen={handleDeleteImageClick}
+            cards={cards}
+            isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+            isAddPlacePopupOpen={isAddPlacePopupOpen}
+            isEditProfilePopupOpen={isEditProfilePopupOpen}
+            isImageModalOpen={isImageModalOpen}
+            isDeleteImagePopupOpen={isDeleteImagePopupOpen}
+            cardData={selectedCard}
+            onCardLike={handleCardLike}
+          />
+          <Footer />
+        </div>
         <EditProfilePopup
           isOpen={isEditProfilePopupOpen}
           onClose={closeAllPopups}
@@ -186,7 +189,8 @@ function App() {
           onClose={closeAllPopups}
           deleteCard={handleDeleteCard} />
         <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
-        <Footer />
+
+
       </div>
     </CurrentUserContext.Provider>
   );
