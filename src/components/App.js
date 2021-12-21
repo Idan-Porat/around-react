@@ -151,9 +151,9 @@ function App() {
 
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div class="root">
-        <div className="root__wrapper">
+    <div className="root">
+      <div className="root__wrapper">
+        <CurrentUserContext.Provider value={currentUser}>
           <Header />
           <Main onEditProfileClick={handleEditProfileClick}
             onAddPlaceClick={handleAddPlaceClick}
@@ -171,28 +171,28 @@ function App() {
             onCardLike={handleCardLike}
           />
           <Footer />
-        </div>
-        <EditProfilePopup
-          isOpen={isEditProfilePopupOpen}
-          onClose={closeAllPopups}
-          updateCurrentUser={handleUpdateUser} />
-        <EditAvatarPopup
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          onUpdateAvatar={handleUpdateAvatar} />
-        <AddPlacePopup
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          addNewPhoto={handleAddPlaceSubmit} />
-        <DeletePhotoPopup
-          isOpen={isDeleteImagePopupOpen}
-          onClose={closeAllPopups}
-          deleteCard={handleDeleteCard} />
-        <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
 
-
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            updateCurrentUser={handleUpdateUser} />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar} />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            addNewPhoto={handleAddPlaceSubmit} />
+          <DeletePhotoPopup
+            isOpen={isDeleteImagePopupOpen}
+            onClose={closeAllPopups}
+            deleteCard={handleDeleteCard} />
+          <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
+        </CurrentUserContext.Provider>
       </div>
-    </CurrentUserContext.Provider>
+    </div>
+
   );
 }
 
