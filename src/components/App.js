@@ -151,9 +151,9 @@ function App() {
 
 
   return (
-    <div className="root">
-      <div className="root__wrapper">
-        <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="root">
+        <div className="root__wrapper">
           <Header />
           <Main onEditProfileClick={handleEditProfileClick}
             onAddPlaceClick={handleAddPlaceClick}
@@ -171,28 +171,26 @@ function App() {
             onCardLike={handleCardLike}
           />
           <Footer />
-
-          <EditProfilePopup
-            isOpen={isEditProfilePopupOpen}
-            onClose={closeAllPopups}
-            updateCurrentUser={handleUpdateUser} />
-          <EditAvatarPopup
-            isOpen={isEditAvatarPopupOpen}
-            onClose={closeAllPopups}
-            onUpdateAvatar={handleUpdateAvatar} />
-          <AddPlacePopup
-            isOpen={isAddPlacePopupOpen}
-            onClose={closeAllPopups}
-            addNewPhoto={handleAddPlaceSubmit} />
-          <DeletePhotoPopup
-            isOpen={isDeleteImagePopupOpen}
-            onClose={closeAllPopups}
-            deleteCard={handleDeleteCard} />
-          <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
-        </CurrentUserContext.Provider>
+        </div>
+        <EditProfilePopup
+          isOpen={isEditProfilePopupOpen}
+          onClose={closeAllPopups}
+          updateCurrentUser={handleUpdateUser} />
+        <EditAvatarPopup
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          onUpdateAvatar={handleUpdateAvatar} />
+        <AddPlacePopup
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          addNewPhoto={handleAddPlaceSubmit} />
+        <DeletePhotoPopup
+          isOpen={isDeleteImagePopupOpen}
+          onClose={closeAllPopups}
+          deleteCard={handleDeleteCard} />
+        <ImagePopup isOpen={isImageModalOpen} cardObj={selectedCard} onClose={closeAllPopups} />
       </div>
-    </div>
-
+    </CurrentUserContext.Provider>
   );
 }
 
